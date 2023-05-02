@@ -153,7 +153,7 @@ def pull_checkpoint(checkpoint, override=False):
     path = f'https://data.ciirc.cvut.cz/public/projects/2022ViewFormer/checkpoints/{checkpoint}.tar.gz'
 
     basename = os.path.split(path)[1][:-len('.tar.gz')]
-    local_path = os.path.expanduser(f'~/.cache/viewformer/{basename}')
+    local_path = os.path.expanduser(f'/scratch/network/tmd4/viewformer/{basename}')
     if os.path.exists(local_path):
         if override:
             shutil.rmtree(local_path)

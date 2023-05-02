@@ -96,37 +96,37 @@ class CO3DLoader:
 
     def install(self):
         if not self._installed:
-            if not os.path.exists(os.path.expanduser('~/.cache/viewformer/co3d')):
+            if not os.path.exists(os.path.expanduser('/scratch/network/tmd4/viewformer/co3d')):
                 import urllib.request
                 import zipfile
                 import shutil
-                os.makedirs(os.path.expanduser('~/.cache/viewformer'), exist_ok=True)
+                os.makedirs(os.path.expanduser('/scratch/network/tmd4/viewformer'), exist_ok=True)
                 with urllib.request.urlopen('https://github.com/facebookresearch/co3d/archive/d4895dd3976b1c6afb9e9221c047f67c678eaf08.zip') as f:
                     with io.BytesIO(f.read()) as bytes_io:
                         f.close()
                         with zipfile.ZipFile(bytes_io, 'r') as archive:
-                            archive.extractall(os.path.expanduser('~/.cache/viewformer'))
-                shutil.move(os.path.expanduser('~/.cache/viewformer/co3d-d4895dd3976b1c6afb9e9221c047f67c678eaf08'), os.path.expanduser('~/.cache/viewformer/co3d'))
-                logging.info(f'CO3D installed to "{os.path.expanduser("~/.cache/viewformer/co3d")}"')
+                            archive.extractall(os.path.expanduser('/scratch/network/tmd4/viewformer'))
+                shutil.move(os.path.expanduser('/scratch/network/tmd4/viewformer/co3d-d4895dd3976b1c6afb9e9221c047f67c678eaf08'), os.path.expanduser('/scratch/network/tmd4/viewformer/co3d'))
+                logging.info(f'CO3D installed to "{os.path.expanduser("/scratch/network/tmd4/viewformer/co3d")}"')
 
             def use_dataset_zoo():
                 class ctx:
                     def __enter__(self):
                         import sys
-                        sys.path.insert(0, os.path.expanduser('~/.cache/viewformer/co3d'))
+                        sys.path.insert(0, os.path.expanduser('/scratch/network/tmd4/viewformer/co3d'))
                         from dataset.dataset_zoo import dataset_zoo
                         return dataset_zoo
 
                     def __exit__(self, *args, **kwargs):
                         import sys
-                        sys.path.remove(os.path.expanduser('~/.cache/viewformer/co3d'))
+                        sys.path.remove(os.path.expanduser('/scratch/network/tmd4/viewformer/co3d'))
                 return ctx()
 
             def use_val_dataset():
                 class ctx:
                     def __enter__(self):
                         import sys
-                        sys.path.insert(0, os.path.expanduser('~/.cache/viewformer/co3d'))
+                        sys.path.insert(0, os.path.expanduser('/scratch/network/tmd4/viewformer/co3d'))
                         from dataset.co3d_dataset import Co3dDataset
                         from dataset.dataset_zoo import DATASET_CONFIGS
                         val_dataset = partial(co3d_val_dataset, Co3dDataset=Co3dDataset, DATASET_CONFIGS=DATASET_CONFIGS)
@@ -134,7 +134,7 @@ class CO3DLoader:
 
                     def __exit__(self, *args, **kwargs):
                         import sys
-                        sys.path.remove(os.path.expanduser('~/.cache/viewformer/co3d'))
+                        sys.path.remove(os.path.expanduser('/scratch/network/tmd4/viewformer/co3d'))
                 return ctx()
 
             self.use_val_dataset = use_val_dataset

@@ -51,30 +51,30 @@ class CO3Dv2Loader:
 
     def install(self):
         if not self._installed:
-            if not os.path.exists(os.path.expanduser('~/.cache/viewformer/co3dv2')):
+            if not os.path.exists(os.path.expanduser('/scratch/network/tmd4/viewformer/co3dv2')):
                 import urllib.request
                 import zipfile
                 import shutil
-                os.makedirs(os.path.expanduser('~/.cache/viewformer'), exist_ok=True)
+                os.makedirs(os.path.expanduser('/scratch/network/tmd4/viewformer'), exist_ok=True)
                 with urllib.request.urlopen('https://github.com/facebookresearch/co3d/archive/c5c6c8ab1b39c70c4661581b84e0b2a5dfab1f64.zip') as f:
                     with io.BytesIO(f.read()) as bytes_io:
                         f.close()
                         with zipfile.ZipFile(bytes_io, 'r') as archive:
-                            archive.extractall(os.path.expanduser('~/.cache/viewformer'))
-                shutil.move(os.path.expanduser('~/.cache/viewformer/co3d-c5c6c8ab1b39c70c4661581b84e0b2a5dfab1f64'), os.path.expanduser('~/.cache/viewformer/co3dv2'))
-                logging.info(f'CO3Dv2 installed to "{os.path.expanduser("~/.cache/viewformer/co3dv2")}"')
+                            archive.extractall(os.path.expanduser('/scratch/network/tmd4/viewformer'))
+                shutil.move(os.path.expanduser('/scratch/network/tmd4/viewformer/co3d-c5c6c8ab1b39c70c4661581b84e0b2a5dfab1f64'), os.path.expanduser('/scratch/network/tmd4/viewformer/co3dv2'))
+                logging.info(f'CO3Dv2 installed to "{os.path.expanduser("/scratch/network/tmd4/viewformer/co3dv2")}"')
 
             def use_co3d_data_types():
                 class ctx:
                     def __enter__(self):
                         import sys
-                        sys.path.insert(0, os.path.expanduser('~/.cache/viewformer/co3dv2'))
+                        sys.path.insert(0, os.path.expanduser('/scratch/network/tmd4/viewformer/co3dv2'))
                         from co3d.dataset import data_types
                         return data_types
 
                     def __exit__(self, *args, **kwargs):
                         import sys
-                        sys.path.remove(os.path.expanduser('~/.cache/viewformer/co3dv2'))
+                        sys.path.remove(os.path.expanduser('/scratch/network/tmd4/viewformer/co3dv2'))
                 return ctx()
 
             self.use_co3d_data_types = use_co3d_data_types
