@@ -59,6 +59,7 @@ class DatasetLoader:
                  shuffle_sequence_items: bool = False, shuffle_buffer_size: int = 10000,
                  seed: int = 42,
                  image_size: int = None, **kwargs):
+        print('DatasetLoader init')
         self.dataset_info = get_dataset_info(path)
         self.path = path
         self.split = split

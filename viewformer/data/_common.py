@@ -376,7 +376,7 @@ def read_dataset(dataset_path, split: str, output_tf_dataset=False, shards=None,
         shards = [f'{dataset_path}/{name}-{split}-{i:06d}-of-{size:06d}.tar' for i in shards]
     else:
         raise RuntimeError(f'dataset format {info["format"]} not in "tf", "webd"')
-
+    print('shards', shards)
     return read_shards(shards, info, output_tf_dataset=output_tf_dataset, **kwargs)
 
 

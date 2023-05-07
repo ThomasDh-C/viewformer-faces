@@ -49,7 +49,8 @@ def generate_batch_predictions(transformer_model, codebook_model, images, camera
         # codes = tf.ragged.map_flat_values(encode, codes)
         batch_size, seq_len, *im_dim = tf.unstack(tf.shape(images), 5)
         code_len = transformer_model.config.token_image_size
-        codes = tf.reshape(encode(tf.reshape(images, [batch_size * seq_len] + list(im_dim))), [batch_size, seq_len, code_len, code_len])
+        reshaped_imgs = tf.reshape(images, [batch_size * seq_len] + list(im_dim))
+        codes = tf.reshape(encode(reshaped_imgs), [batch_size, seq_len, code_len, code_len])
 
     # Generate image tokens
     with tf.name_scope('transformer_generate_images'):
