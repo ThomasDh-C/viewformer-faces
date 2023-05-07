@@ -2,12 +2,13 @@
 import os
 from setuptools import setup, find_packages
 
-requirements = '''torch==1.7.1
-torchvision==0.8.2
+# torch==1.7.1
+# torchvision==0.8.2
+# pytorch-lightning==1.1.2
+requirements = '''
 tensorflow-addons>=0.12.1
 tensorflow>=2.4.1
 fsspec>=0.8.5
-pytorch-lightning==1.1.2
 webdataset==0.1.40
 colorlog>=4.4.0
 wandb>=0.10.8
