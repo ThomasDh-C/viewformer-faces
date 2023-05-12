@@ -5,6 +5,7 @@ import math
 from typing import Callable, Optional, List, Union
 from tensorflow.keras import mixed_precision
 from tensorflow.keras import layers
+import tensorflow_models as tfm
 
 
 def angle_squared_difference(y_true, y_pred):
@@ -415,7 +416,7 @@ def create_optimizer(
             warmup_steps=num_warmup_steps,
         )
     if weight_decay_rate > 0.0:
-        optimizer = AdamWeightDecay(
+        optimizer = tfm.optimization.legacy_adamw.AdamWeightDecay(
             learning_rate=lr_schedule,
             weight_decay_rate=weight_decay_rate,
             beta_1=adam_beta1,

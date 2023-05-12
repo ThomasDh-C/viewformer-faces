@@ -21,7 +21,7 @@ def main(
         job_dir: str,
         total_steps: int,
         gradient_clip_val: float,
-        epochs: int = 100,
+        epochs: int = 10000,
         num_gpus: int = 8,
         num_nodes: int = 1,
         profile: bool = False,
